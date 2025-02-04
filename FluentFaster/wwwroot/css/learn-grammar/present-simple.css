@@ -1,0 +1,87 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+span {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+
+.main-page {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+}
+
+.left-side, .right-side {
+    flex: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 30px;
+}
+
+td {
+    width: 150px;
+    height: 130px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 12px;
+    font-family: "Sour Gummy", sans-serif;
+}
+
+.first-column {
+    font-size: 21px;
+    width: 100px;
+}
+
+.row1 td {
+    background-color: #4b2e83;
+    color: white;
+}
+
+.row2 td {
+    background-color: #7f55b6;
+    color: white;
+}
+
+.row3 td {
+    background-color: #a8e14a;
+    color: #4b2e83;
+}
+
+.title-verbs, .title-tobe {
+    text-align: center;
+    font-size: 35px;
+    padding-top: 20px;
+    font-weight: 10px;
+    font-family: "Sour Gummy", sans-serif;
+}
+
+.button-box {
+    transition: background-color 0.3s ease;
+}
+
+    .button-box:hover {
+        background-color: #488f8b;
+    }
+
+.button-container {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}

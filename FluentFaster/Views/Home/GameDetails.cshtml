@@ -1,0 +1,36 @@
+﻿@model FluentFaster.Models.Game
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/css/main-page.css" asp-append-version="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.GameName</title>
+</head>
+<body>
+    <div class="lessons">
+        <div class="container">
+            <div class="lessons-holder">
+                @if (Model.GrammarTopics.Any())
+                {
+                        @foreach (var topic in Model.GrammarTopics)
+                        {
+                        <a href="@Url.Action("TopicDetails", "LearnGrammar", new { id = topic.TopicID })" class="card-link">
+                            <div class="card">
+                                    <div class="lesson-title">
+                                        @topic.TopicName
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                }
+                else
+                {
+                    <p>In developement</p>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

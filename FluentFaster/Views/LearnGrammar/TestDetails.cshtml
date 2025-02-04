@@ -1,0 +1,85 @@
+﻿@model FluentFaster.Models.Test
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/css/learn-grammar/Test.css" asp-append-version="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.TestName</title>
+    <script>
+        function submitTest() {
+            let correct = 0;
+            let total = @Model.Questions.Count;
+
+            document.querySelectorAll(".question").forEach(q => {
+                let correctAnswer = q.dataset.correct;
+                let selected = q.querySelector("input:checked");
+                if (selected && selected.value === correctAnswer) correct++;
+            });
+
+            let percent = (correct / total) * 100;
+            document.getElementById("resultText").innerText = `Результат: ${correct}/${total} (${percent.toFixed(2)}%)`;
+            document.getElementById("resultModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("resultModal").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>@Model.TestName</h1>
+        <form id="testForm">
+            @foreach (var question in Model.Questions)
+            {
+                <div class="question" data-correct="@question.AnswerOptions.First(o => o.IsCorrect).OptionID">
+                    <p>@question.QuestionText</p>
+                    @foreach (var option in question.AnswerOptions)
+                    {
+                        <label>
+                            <input type="radio" name="q_@question.QuestionID" value="@option.OptionID"> @option.OptionText
+                        </label>
+
+                        <br>
+                    }
+                </div>
+            }
+            <button type="button" class="btn btn-success" onclick="submitTest()">Submit</button>
+        </form>
+    </div>
+
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="resultText"></p>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background: white;
+        margin: 15% auto;
+        padding: 20px;
+        width: 50%;
+        text-align: center;
+    }
+
+    .close {
+        float: right;
+        font-size: 28px;
+        cursor: pointer;
+    }
+</style>
