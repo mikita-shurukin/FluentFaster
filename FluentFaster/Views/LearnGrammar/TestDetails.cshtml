@@ -1,85 +1,131 @@
 ﻿@model FluentFaster.Models.Test
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+@{
+    ViewData["Title"] = @Model.TestName;
+}
+
+@section Styles {
     <link rel="stylesheet" href="~/css/learn-grammar/Test.css" asp-append-version="true">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Model.TestName</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .test-container {
+            max-width: 700px;
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+            .btn-submit:hover {
+                background: #218838;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            font-size: 24px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+}
+
+<div class="test-container">
+    <h1>@Model.TestName</h1>
+    <form id="testForm">
+        @foreach (var question in Model.Questions)
+        {
+            <div class="question" data-correct="@question.AnswerOptions.First(o => o.IsCorrect).OptionID">
+                <p>@question.QuestionText</p>
+                @foreach (var option in question.AnswerOptions)
+                {
+                    <label>
+                        <input type="radio" name="q_@question.QuestionID" value="@option.OptionID"> @option.OptionText
+                    </label>
+                }
+            </div>
+        }
+        <button type="button" class="btn-submit" onclick="submitTest()">Submit</button>
+    </form>
+</div>
+
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p id="resultText"></p>
+    </div>
+</div>
+
+@section Scripts {
     <script>
         function submitTest() {
             let correct = 0;
             let total = @Model.Questions.Count;
-
             document.querySelectorAll(".question").forEach(q => {
                 let correctAnswer = q.dataset.correct;
                 let selected = q.querySelector("input:checked");
                 if (selected && selected.value === correctAnswer) correct++;
             });
-
             let percent = (correct / total) * 100;
             document.getElementById("resultText").innerText = `Результат: ${correct}/${total} (${percent.toFixed(2)}%)`;
-            document.getElementById("resultModal").style.display = "block";
+            document.getElementById("resultModal").style.display = "flex";
         }
+
         function closeModal() {
             document.getElementById("resultModal").style.display = "none";
         }
     </script>
-</head>
-<body>
-    <div class="container">
-        <h1>@Model.TestName</h1>
-        <form id="testForm">
-            @foreach (var question in Model.Questions)
-            {
-                <div class="question" data-correct="@question.AnswerOptions.First(o => o.IsCorrect).OptionID">
-                    <p>@question.QuestionText</p>
-                    @foreach (var option in question.AnswerOptions)
-                    {
-                        <label>
-                            <input type="radio" name="q_@question.QuestionID" value="@option.OptionID"> @option.OptionText
-                        </label>
-
-                        <br>
-                    }
-                </div>
-            }
-            <button type="button" class="btn btn-success" onclick="submitTest()">Submit</button>
-        </form>
-    </div>
-
-    <div id="resultModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <p id="resultText"></p>
-        </div>
-    </div>
-</body>
-</html>
-
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-    }
-
-    .modal-content {
-        background: white;
-        margin: 15% auto;
-        padding: 20px;
-        width: 50%;
-        text-align: center;
-    }
-
-    .close {
-        float: right;
-        font-size: 28px;
-        cursor: pointer;
-    }
-</style>
+}

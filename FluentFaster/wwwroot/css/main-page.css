@@ -20,12 +20,13 @@
 
 .lessons-holder {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Равномерное распределение 3 карточек */
+    grid-template-columns: repeat(3, 1fr);  
     gap: 20px;
-    width: 100%; /* Растягиваем по ширине */
+    width: 100%; 
     padding: 20px;
     box-sizing: border-box;
 }
+
 
 .card {
     display: flex;
@@ -43,7 +44,7 @@
 }
 
     .card:hover {
-        transform: scale(1.05); /* Небольшой эффект увеличения при наведении */
+        transform: scale(1.05);  
     }
 
 .card-link {

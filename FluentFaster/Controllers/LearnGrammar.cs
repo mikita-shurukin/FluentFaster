@@ -50,6 +50,13 @@ namespace FluentFaster.Controllers
             if (test == null)
                 return NotFound();
 
+            test.Questions = test.Questions.OrderBy(q => Guid.NewGuid()).ToList(); //random questions
+
+            foreach (var question in test.Questions)
+            {
+                question.AnswerOptions = question.AnswerOptions.OrderBy(a => Guid.NewGuid()).ToList(); //random anwsers
+            }
+
             return View(test);
         }
     }
