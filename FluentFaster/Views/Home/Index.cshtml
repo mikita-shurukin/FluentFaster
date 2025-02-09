@@ -1,36 +1,60 @@
 ﻿@model IEnumerable<FluentFaster.Models.Game>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="~/css/main-page.css" asp-append-version="true" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
     <title>FluentLab</title>
-
 </head>
 <body>
     <div class="lessons">
         <div class="container">
-            <div class="lessons-holder">
-                @foreach (var game in Model)
-                {
-                    <a href="@Url.Action("GameDetails", "Home", new { id = game.GameID })" class="card-link">
-                        <div class="card">
-                            <div class="lesson-title">
-                                @game.GameName
-                            </div>
-                        </div>
-                    </a>
-                }
-            </div>
+            @if (Model.Any())
+            {
+                <table class="lessons-table">
+                    <tbody>
+                        @{
+                            int columns = 3;
+                            int count = 0;
+                        }
+                        @foreach (var game in Model)
+                        {
+                            if (count % columns == 0)
+                            {
+                                @:<tr>
+                            }
+                            <td>
+                                <a href="@Url.Action("GameDetails", "Home", new { id = game.GameID })" class="card-link">
+                                    <div class="card">
+                                        <div class="lesson-title">
+                                            @game.GameName
+                                        </div>
+                                    </div>
+                                </a>
+                            </td>
+                            count++;
+                            if (count % columns == 0)
+                            {
+                                @:</tr>
+                            }
+                        }
+                        @if (count % columns != 0)
+                        {
+                            @:</tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>В разработке</p>
+            }
         </div>
     </div>
 </body>
+</html>

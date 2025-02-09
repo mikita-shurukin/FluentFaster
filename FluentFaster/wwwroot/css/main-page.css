@@ -9,31 +9,39 @@
 }
 
 .container {
-    width: 1920px;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .lessons {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.lessons-holder {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);  
-    gap: 20px;
-    width: 100%; 
     padding: 20px;
-    box-sizing: border-box;
 }
 
+.lessons-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+    .lessons-table td {
+        padding: 10px;
+        text-align: center;
+        width: 33.33%;
+    }
 
 .card {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 250px; 
-    width: 400px;
+    height: 250px;
+    width: 100%;
+    max-width: 380px;
     background-color: #f0f0f0;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -44,10 +52,11 @@
 }
 
     .card:hover {
-        transform: scale(1.05);  
+        transform: scale(1.05);
     }
 
 .card-link {
+    display: block;
     text-decoration: none;
     color: inherit;
 }

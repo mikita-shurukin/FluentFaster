@@ -24,7 +24,7 @@ namespace FluentFaster.Controllers
             if (topic == null)
                 return NotFound();
 
-            var viewName = topic.TopicName.Replace(" ", "");
+            var viewName = topic.TopicName.Replace(" ", "").Replace("/","-");
 
             if (!ViewExists(viewName))
             {

@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Modal Verbs";
+}
+
+@section Styles {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Отступ сверху, чтобы избежать перекрытия хедером */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #d9534f;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .ability {
+            background-color: #b3e0f2;
+        }
+
+        .permission {
+            background-color: #99ffcc;
+        }
+
+        .advice {
+            background-color: #fff299;
+        }
+
+        .obligation {
+            background-color: #e6b3ff;
+        }
+
+        .possibility {
+            background-color: #ffb3b3;
+        }
+
+        .button-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+}
+
+<div class="content-wrapper">
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Modal Verbs</th>
+            <th>Examples</th>
+        </tr>
+        <tr class="ability">
+            <td>ABILITY</td>
+            <td>Can, Could</td>
+            <td>
+                • David can speak three languages.<br>
+                • He could speak fluent French when he was 5.
+            </td>
+        </tr>
+        <tr class="permission">
+            <td>PERMISSION</td>
+            <td>Can, Could, May</td>
+            <td>
+                • Can I sit in that chair please?<br>
+                • Could I open the window?<br>
+                • May I borrow your dictionary?
+            </td>
+        </tr>
+        <tr class="advice">
+            <td>ADVICE</td>
+            <td>Should</td>
+            <td>
+                • You should visit your dentist at least twice a year.<br>
+                • You should try to lose weight.
+            </td>
+        </tr>
+        <tr class="obligation">
+            <td>OBLIGATION</td>
+            <td>Must, Have to</td>
+            <td>
+                • I must memorize all of these rules about tenses.<br>
+                • You have to take off your shoes before you get into the mosque.
+            </td>
+        </tr>
+        <tr class="possibility">
+            <td>POSSIBILITY</td>
+            <td>Might, May, Could, Can</td>
+            <td>
+                • It looks nice, but it might be very expensive.<br>
+                • Richard may be coming to see us tomorrow.
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="button-container">
+    <a href="@Url.Action("TestDetails", "LearnGrammar", new { id = Model.TopicID })" class="btn btn-primary">Start Test</a>
+</div>

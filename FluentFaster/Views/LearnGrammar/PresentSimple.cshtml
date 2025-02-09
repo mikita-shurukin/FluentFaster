@@ -34,25 +34,6 @@
         width: 100%;
     }
 
-    .switch-button {
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        background-color: #4b2e83;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        font-size: 20px;
-        cursor: pointer;
-        border-radius: 50%;
-        transition: background 0.3s;
-    }
-
-        .switch-button:hover {
-            background-color: #7f55b6;
-        }
-
     .modal {
         display: none;
         position: fixed;
@@ -85,7 +66,6 @@
 
 <body>
     <div class="container">
-        <button class="switch-button" onclick="toggleSide()">&#8594;</button>
         <div class="main-page" id="contentContainer">
             <div class="left-side">
                 <div class="title-verbs">
@@ -313,6 +293,7 @@
         </div>
     </div>
     <div class="button-container">
+        <button class="switch-button" onclick="toggleSide()">&#8594;</button>
         <a href="@Url.Action("TestDetails", "LearnGrammar", new { id = Model.TopicID })" class="btn btn-primary">Start Test</a>
     </div>
     <script>
@@ -325,11 +306,21 @@
     </script>
 
     <script>
-        let toggled = false;
+        let isRightSideVisible = false;
+
         function toggleSide() {
             const container = document.getElementById("contentContainer");
-            toggled = !toggled;
-            container.style.transform = toggled ? "translateX(-50%)" : "translateX(0)";
+            const button = document.querySelector(".switch-button");
+
+            if (isRightSideVisible) {
+                container.style.transform = "translateX(0%)"; // Возвращаем на первое правило
+                button.innerHTML = "&#8594;"; // Меняем стрелку направо
+            } else {
+                container.style.transform = "translateX(-50%)"; // Переключаем на второе правило
+                button.innerHTML = "&#8592;"; // Меняем стрелку налево
+            }
+
+            isRightSideVisible = !isRightSideVisible;
         }
     </script>
 

@@ -11,25 +11,46 @@
 <body>
     <div class="lessons">
         <div class="container">
-            <div class="lessons-holder">
-                @if (Model.GrammarTopics.Any())
-                {
+            @if (Model.GrammarTopics.Any())
+            {
+                <table class="lessons-table">
+                    <tbody>
+                        @{
+                            int columns = 3;
+                            int count = 0;
+                        }
                         @foreach (var topic in Model.GrammarTopics)
                         {
-                        <a href="@Url.Action("TopicDetails", "LearnGrammar", new { id = topic.TopicID })" class="card-link">
-                            <div class="card">
-                                    <div class="lesson-title">
-                                        @topic.TopicName
+                            if (count % columns == 0)
+                            {
+                                @:<tr>
+                            }
+                            <td>
+                                <a href="@Url.Action("TopicDetails", "LearnGrammar", new { id = topic.TopicID })" class="card-link">
+                                    <div class="card">
+                                        <div class="lesson-title">
+                                            @topic.TopicName
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </td>
+                            count++;
+                            if (count % columns == 0)
+                            {
+                                @:</tr>
+                            }
                         }
-                }
-                else
-                {
-                    <p>In developement</p>
-                }
-            </div>
+                        @if (count % columns != 0)
+                        {
+                            @:</tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>In development</p>
+            }
         </div>
     </div>
 </body>

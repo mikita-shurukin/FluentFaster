@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Prepositions of Time";
+}
+
+@section Styles {
+    <style>
+
+        body{
+            overflow: hidden;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ffeb99;
+            color: #333;
+            font-size: 18px;
+        }
+
+        td:nth-child(1) {
+            background-color: #ffb3b3;
+        }
+
+        td:nth-child(2) {
+            background-color: #99e6b3; 
+        }
+
+        td:nth-child(3) {
+            background-color: #b3e0ff;
+        }
+
+        .button-box {
+            transition: background-color 0.3s ease;
+        }
+
+            .button-box:hover {
+                background-color: #488f8b;
+            }
+
+        .button-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            gap: 10px; 
+        }
+
+    </style>
+}
+
+<div class="container">
+    <h1 class="text-center my-2 fs-4">Prepositions of Time</h1>
+    <table>
+        <tr>
+            <th>ON <br>(days and dates)</th>
+            <th>IN <br>(longer periods)</th>
+            <th>AT <br>(the time of day)</th>
+        </tr>
+        <tr>
+            <td>On Tuesday</td>
+            <td>In 2010</td>
+            <td>At sunset</td>
+        </tr>
+        <tr>
+            <td>On Saturday</td>
+            <td>In 18th century</td>
+            <td>At sunrise</td>
+        </tr>
+        <tr>
+            <td>On 5 April</td>
+            <td>In the 1960s</td>
+            <td>At bedtime</td>
+        </tr>
+        <tr>
+            <td>On 12 Mar. 2019</td>
+            <td>In the next century</td>
+            <td>At noon</td>
+        </tr>
+        <tr>
+            <td>On Sunday morning(s)</td>
+            <td>In the Ice Age</td>
+            <td>At dinnertime</td>
+        </tr>
+        <tr>
+            <td>On Christmas Day</td>
+            <td>In February</td>
+            <td>At midnight</td>
+        </tr>
+        <tr>
+            <td>On my birthday</td>
+            <td>In the middle ages</td>
+            <td>At 11.30pm</td>
+        </tr>
+        <tr>
+            <td>On New Year’s Eve</td>
+            <td>In the summer</td>
+            <td>At 12 o’clock</td>
+        </tr>
+        <tr>
+            <td>On Independence Day</td>
+            <td>In the past</td>
+            <td>At lunchtime</td>
+        </tr>
+    </table>
+    <div class="button-container">
+        <a href="@Url.Action("TestDetails", "LearnGrammar", new { id = Model.TopicID })" class="btn btn-primary">Start Test</a>
+
+    </div>
+</div>

@@ -1,184 +1,326 @@
 ﻿@model FluentFaster.Models.GrammarTopic
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Past Simple</title>
-    <link rel="stylesheet" href="/css/learn-grammar/past-simple.css">
+    <title>Present Simple</title>
+    <link rel="stylesheet" href="/css/learn-grammar/present-simple.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    <style>
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .main-page {
-            display: flex;
-            width: 200%;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .left-side, .right-side {
-            flex: 1;
-            width: 100%;
-        }
-
-        .switch-button {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            background-color: #4b2e83;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-
-            .switch-button:hover {
-                background-color: #7f55b6;
-            }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
-            text-align: left;
-        }
-
-        .close-btn {
-            float: right;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
 </head>
+
+<style>
+    .container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .main-page {
+        display: flex;
+        width: 200%;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .left-side, .right-side {
+        flex: 1;
+        width: 100%;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 500px;
+        text-align: left;
+    }
+
+    .close-btn {
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
 
 <body>
     <div class="container">
-        <button class="switch-button" onclick="toggleSide()">&#8594;</button>
         <div class="main-page" id="contentContainer">
-            <div class="first-side">
+            <div class="left-side">
                 <div class="title-verbs">
-                    Past Simple with regular verbs
+                    Present Simple with verbs
                 </div>
                 <table>
                     <tr class="row1">
                         <td class="first-column">Affirmative</td>
-                        <td class="button-box" onclick="showExamples('modal1')">I<br>worked<br>talked<br>helped</td>
-                        <td class="button-box" onclick="showExamples('modal2')">HE/SHE/IT<br>worked<br>talked<br>helped</td>
-                        <td class="button-box" onclick="showExamples('modal3')">YOU/WE/THEY<br>worked<br>talked<br>helped</td>
+                        <td class="button-box" onclick="showExamples('modal1')">I<br>read<br>write<br>work</td>
+                        <td class="button-box" onclick="showExamples('modal2')">HE/SHE/IT<br>reads<br>writes<br>works</td>
+                        <td class="button-box" onclick="showExamples('modal3')">YOU/WE/THEY<br>read<br>write<br>work</td>
                     </tr>
                     <tr class="row2">
                         <td class="first-column">Question</td>
-                        <td class="button-box" onclick="showExamples('modal4')"><span>DID</span> I<br>work?<br>talk?<br>help?</td>
-                        <td class="button-box" onclick="showExamples('modal5')"><span>DID</span> HE/SHE/IT<br>work?<br>talk?<br>help?</td>
-                        <td class="button-box" onclick="showExamples('modal6')"><span>DID</span> YOU/WE/THEY<br>work?<br>talk?<br>help?</td>
+                        <td class="button-box" onclick="showExamples('modal4')"><span>DO</span> I<br>read?<br>write?<br>work?</td>
+                        <td class="button-box" onclick="showExamples('modal5')"><span>DOES</span> HE/SHE/IT<br>read?<br>write?<br>work?</td>
+                        <td class="button-box" onclick="showExamples('modal6')"><span>DO</span> YOU/WE/THEY<br>read?<br>write?<br>work?</td>
                     </tr>
                     <tr class="row3">
                         <td class="first-column">Negative</td>
-                        <td class="button-box" onclick="showExamples('modal7')">I <span>DIDN'T</span><br>work<br>talk<br>help</td>
-                        <td class="button-box" onclick="showExamples('modal8')">HE/SHE/IT <span>DIDN'T</span><br>work<br>talk<br>help</td>
-                        <td class="button-box" onclick="showExamples('modal9')">YOU/WE/THEY <span>DIDN'T</span><br>work<br>talk<br>help</td>
+                        <td class="button-box" onclick="showExamples('modal7')">I <span>DON'T</span><br>read<br>write<br>work</td>
+                        <td class="button-box" onclick="showExamples('modal8')">HE/SHE/IT <span>DOESN'T</span><br>read<br>write<br>work</td>
+                        <td class="button-box" onclick="showExamples('modal9')">YOU/WE/THEY <span>DON'T</span><br>read<br>write<br>work</td>
+                    </tr>
+                </table>
+
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+                        <h2>Examples (I - Affirmative)</h2>
+                        <p>- I read books every day.</p>
+                        <p>- I write letters to my family.</p>
+                        <p>- I work hard on my studies.</p>
+                    </div>
+                </div>
+                <div id="modal2" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+                        <h2>Examples (HE/SHE/IT - Affirmative)</h2>
+                        <p>- He reads the newspaper every morning.</p>
+                        <p>- She writes emails at work.</p>
+                        <p>- It works well with the new software.</p>
+                    </div>
+                </div>
+                <div id="modal3" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+                        <h2>Examples (YOU/WE/THEY - Affirmative)</h2>
+                        <p>- You read interesting articles.</p>
+                        <p>- We write reports together.</p>
+                        <p>- They work in the same company.</p>
+                    </div>
+                </div>
+                <div id="modal4" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+                        <h2>Examples (I - Question)</h2>
+                        <p>- Do I read often?</p>
+                        <p>- Do I write clearly?</p>
+                        <p>- Do I work efficiently?</p>
+                    </div>
+                </div>
+                <div id="modal5" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal5')">&times;</span>
+                        <h2>Examples (HE/SHE/IT - Question)</h2>
+                        <p>- Does he read novels?</p>
+                        <p>- Does she write for a magazine?</p>
+                        <p>- Does it work properly?</p>
+                    </div>
+                </div>
+                <div id="modal6" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal6')">&times;</span>
+                        <h2>Examples (YOU/WE/THEY - Question)</h2>
+                        <p>- Do you read this blog?</p>
+                        <p>- Do we write in the journal?</p>
+                        <p>- Do they work on weekends?</p>
+                    </div>
+                </div>
+                <div id="modal7" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal7')">&times;</span>
+                        <h2>Examples (I - Negative)</h2>
+                        <p>- I don't read at night.</p>
+                        <p>- I don't write letters anymore.</p>
+                        <p>- I don't work on Sundays.</p>
+                    </div>
+                </div>
+                <div id="modal8" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal8')">&times;</span>
+                        <h2>Examples (HE/SHE/IT - Negative)</h2>
+                        <p>- He doesn't read comics.</p>
+                        <p>- She doesn't write stories.</p>
+                        <p>- It doesn't work in the cold.</p>
+                    </div>
+                </div>
+                <div id="modal9" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal('modal9')">&times;</span>
+                        <h2>Examples (YOU/WE/THEY - Negative)</h2>
+                        <p>- You don't read the manual.</p>
+                        <p>- We don't write often.</p>
+                        <p>- They don't work at night.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="title-tobe">
+                    Present Simple (to be)
+                </div>
+                <table>
+                    <tr class="row1">
+                        <td class="first-column">Affirmative</td>
+                        <td class="button-box" onclick="showExamples('modal10')">I am<br>happy<br>tall<br>ready</td>
+                        <td class="button-box" onclick="showExamples('modal11')">HE/SHE/IT is<br>happy<br>tall<br>ready</td>
+                        <td class="button-box" onclick="showExamples('modal12')">YOU/WE/THEY are<br>happy<br>tall<br>ready</td>
+                    </tr>
+                    <tr class="row2">
+                        <td class="first-column">Question</td>
+                        <td class="button-box" onclick="showExamples('modal13')"><span>Am</span> I<br>happy?<br>tall?<br>ready?</td>
+                        <td class="button-box" onclick="showExamples('modal14')"><span>Is</span> HE/SHE/IT<br>happy?<br>tall?<br>ready?</td>
+                        <td class="button-box" onclick="showExamples('modal15')"><span>Are</span> YOU/WE/THEY<br>happy?<br>tall?<br>ready?</td>
+                    </tr>
+                    <tr class="row3">
+                        <td class="first-column">Negative</td>
+                        <td class="button-box" onclick="showExamples('modal16')">I <span>am not</span><br>happy<br>tall<br>ready</td>
+                        <td class="button-box" onclick="showExamples('modal17')">HE/SHE/IT <span>is not</span><br>happy<br>tall<br>ready</td>
+                        <td class="button-box" onclick="showExamples('modal18')">YOU/WE/THEY <span>are not</span><br>happy<br>tall<br>ready</td>
                     </tr>
                 </table>
             </div>
 
-            <div class="second-side">
-                <div class="title-verbs">
-                    Past Simple with irregular verbs
+
+            <div id="modal10" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal10')">&times;</span>
+                    <h2>Examples (I - Affirmative)</h2>
+                    <p>- I am a student.</p>
+                    <p>- I am happy.</p>
+                    <p>- I am here.</p>
                 </div>
-                <table>
-                    <tr class="row1">
-                        <td class="button-box">I<br>went<br>ate<br>drank</td>
-                        <td class="button-box">HE/SHE/IT<br>went<br>ate<br>drank</td>
-                        <td class="button-box">YOU/WE/THEY<br>went<br>ate<br>drank</td>
-                    </tr>
-                    <tr class="row2">
-                        <td class="button-box"><span>DID</span> I<br>go?<br>eat?<br>drink?</td>
-                        <td class="button-box"><span>DID</span> HE/SHE/IT<br>go?<br>eat?<br>drink?</td>
-                        <td class="button-box"><span>DID</span> YOU/WE/THEY<br>go?<br>eat?<br>drink?</td>
-                    </tr>
-                    <tr class="row3">
-                        <td class="button-box">I <span>DIDN'T</span><br>go<br>eat<br>drink</td>
-                        <td class="button-box">HE/SHE/IT <span>DIDN'T</span><br>go<br>eat<br>drink</td>
-                        <td class="button-box">YOU/WE/THEY <span>DIDN'T</span><br>go<br>eat<br>drink</td>
-                    </tr>
-                </table>
             </div>
 
-            <div class="third-side">
-                <div class="title-verbs">
-                    Past Simple with "to be" (was/were)
+            <div id="modal11" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal11')">&times;</span>
+                    <h2>Examples (HE/SHE/IT - Affirmative)</h2>
+                    <p>- He is a teacher.</p>
+                    <p>- She is tired.</p>
+                    <p>- It is sunny.</p>
                 </div>
-                <table>
-                    <tr class="row1">
-                        <td class="button-box">I/HE/SHE/IT<br>was</td>
-                        <td class="button-box">YOU/WE/THEY<br>were</td>
-                    </tr>
-                    <tr class="row2">
-                        <td class="button-box"><span>WAS</span> I/HE/SHE/IT?</td>
-                        <td class="button-box"><span>WERE</span> YOU/WE/THEY?</td>
-                    </tr>
-                    <tr class="row3">
-                        <td class="button-box">I/HE/SHE/IT <span>WASN'T</span></td>
-                        <td class="button-box">YOU/WE/THEY <span>WEREN'T</span></td>
-                    </tr>
-                </table>
+            </div>
+
+            <div id="modal12" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal12')">&times;</span>
+                    <h2>Examples (YOU/WE/THEY - Affirmative)</h2>
+                    <p>- You are a friend.</p>
+                    <p>- We are ready.</p>
+                    <p>- They are here.</p>
+                </div>
+            </div>
+
+            <div id="modal13" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal13')">&times;</span>
+                    <h2>Examples (I - Question)</h2>
+                    <p>- Am I right?</p>
+                    <p>- Am I on time?</p>
+                    <p>- Am I clear?</p>
+                </div>
+            </div>
+
+            <div id="modal14" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal14')">&times;</span>
+                    <h2>Examples (HE/SHE/IT - Question)</h2>
+                    <p>- Is he here?</p>
+                    <p>- Is she a doctor?</p>
+                    <p>- Is it raining?</p>
+                </div>
+            </div>
+
+            <div id="modal15" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal15')">&times;</span>
+                    <h2>Examples (YOU/WE/THEY - Question)</h2>
+                    <p>- Are you okay?</p>
+                    <p>- Are we friends?</p>
+                    <p>- Are they there?</p>
+                </div>
+            </div>
+
+            <div id="modal16" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal16')">&times;</span>
+                    <h2>Examples (I - Negative)</h2>
+                    <p>- I am not tired.</p>
+                    <p>- I am not a doctor.</p>
+                    <p>- I am not ready.</p>
+                </div>
+            </div>
+
+            <div id="modal17" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal17')">&times;</span>
+                    <h2>Examples (HE/SHE/IT - Negative)</h2>
+                    <p>- He is not here.</p>
+                    <p>- She is not hungry.</p>
+                    <p>- It is not working.</p>
+                </div>
+            </div>
+
+            <div id="modal18" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal('modal18')">&times;</span>
+                    <h2>Examples (YOU/WE/THEY - Negative)</h2>
+                    <p>- You are not late.</p>
+                    <p>- We are not finished.</p>
+                    <p>- They are not here.</p>
+                </div>
             </div>
         </div>
     </div>
-
     <div class="button-container">
+        <button class="switch-button" onclick="toggleSide()">&#8594;</button>
         <a href="@Url.Action("TestDetails", "LearnGrammar", new { id = Model.TopicID })" class="btn btn-primary">Start Test</a>
     </div>
-
     <script>
         function showExamples(modalId) {
             document.getElementById(modalId).style.display = "flex";
         }
-
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = "none";
         }
     </script>
 
     <script>
-        let currentIndex = 0; 
+        let isRightSideVisible = false;
+
         function toggleSide() {
             const container = document.getElementById("contentContainer");
-            currentIndex = (currentIndex + 1) % 3; 
-
-            container.style.transform = `translateX(-${currentIndex * 33.33}%)`;
-
             const button = document.querySelector(".switch-button");
-            button.innerHTML = currentIndex === 2 ? "&#8592;" : "&#8594;";
+
+            if (isRightSideVisible) {
+                container.style.transform = "translateX(0%)"; // Возвращаем на первое правило
+                button.innerHTML = "&#8594;"; // Меняем стрелку направо
+            } else {
+                container.style.transform = "translateX(-50%)"; // Переключаем на второе правило
+                button.innerHTML = "&#8592;"; // Меняем стрелку налево
+            }
+
+            isRightSideVisible = !isRightSideVisible;
         }
     </script>
 
