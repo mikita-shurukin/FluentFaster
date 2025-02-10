@@ -1,20 +1,19 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<Users> signInManager;
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Users> signInManager
 
-<ul class="navbar-nav ms-auto">
-    @if (signInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
-        </li>
-    }
-</ul>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="~/images/user.png" class="icon" alt="User Icon" />
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+        @if (signInManager.IsSignedIn(User))
+        {
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a></li>
+        }
+        else
+        {
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="Login">Login</a></li>
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="Register">Register</a></li>
+        }
+    </ul>
+</li>

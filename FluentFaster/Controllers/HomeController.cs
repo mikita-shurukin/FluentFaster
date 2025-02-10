@@ -1,5 +1,6 @@
 using FluentFaster.Data;
 using FluentFaster.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -29,10 +30,13 @@ namespace FluentFaster.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [Authorize]
         public IActionResult LearnGrammar()
         {
             return View();
         }
+
+        [Authorize]
         public async Task<IActionResult> Games(int id)
         {
             var game = await _context.Games.Include(t => t.GameName)
@@ -42,6 +46,8 @@ namespace FluentFaster.Controllers
 
             return View(game);
         }
+
+        [Authorize]
         public async Task<IActionResult> GameDetails(int id)
         {
             var game = await _context.Games

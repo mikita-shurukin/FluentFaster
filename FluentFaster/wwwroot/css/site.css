@@ -20,3 +20,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    min-width: 120px;
+}
+
+.dropdown-item {
+    font-size: 14px;
+    padding: 8px 16px;
+}
+
+.navbar-nav .dropdown-menu {
+    right: 0;
+    left: auto;
+}

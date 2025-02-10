@@ -1,5 +1,6 @@
 ﻿using FluentFaster.Data;
 using FluentFaster.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ namespace FluentFaster.Controllers
             _context = context;
         }
 
+        [Authorize]
         public async Task<IActionResult> TopicDetails(int id)
         {
             var topic = await _context.GrammarTopics
@@ -34,12 +36,14 @@ namespace FluentFaster.Controllers
             return View(viewName, topic);
         }
 
+        [Authorize]
         private bool ViewExists(string viewName)
         {
             var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "LearnGrammar", viewName + ".cshtml");
             return System.IO.File.Exists(viewPath);
         }
 
+        [Authorize]
         public async Task<IActionResult> TestDetails(int id)
         {
             var test = await _context.Tests
@@ -50,11 +54,11 @@ namespace FluentFaster.Controllers
             if (test == null)
                 return NotFound();
 
-            test.Questions = test.Questions.OrderBy(q => Guid.NewGuid()).ToList(); //random questions
+            test.Questions = test.Questions.OrderBy(q => Guid.NewGuid()).ToList(); 
 
             foreach (var question in test.Questions)
             {
-                question.AnswerOptions = question.AnswerOptions.OrderBy(a => Guid.NewGuid()).ToList(); //random anwsers
+                question.AnswerOptions = question.AnswerOptions.OrderBy(a => Guid.NewGuid()).ToList(); 
             }
 
             return View(test);
