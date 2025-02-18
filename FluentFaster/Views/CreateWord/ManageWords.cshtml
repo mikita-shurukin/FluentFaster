@@ -1,0 +1,128 @@
+﻿@model FluentFaster.Models.Game
+
+
+@{
+    ViewBag.Title = "Manage Words";
+}
+
+<style>
+    .admin-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .admin-container h2 {
+            text-align: center;
+            color: #258cfb;
+            margin-bottom: 20px;
+        }
+
+    .word-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        .word-table th, .word-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .word-table th {
+            background-color: #f4f4f4;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control, .btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    .btn {
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #258cfb;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: white;
+    }
+</style>
+
+<div class="admin-container">
+    <h2>Manage Words</h2>
+
+    <table class="word-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Word</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var word in Model.Words)
+            {
+                <tr>
+                    <td>@word.WordID</td>
+                    <td>@word.Text</td>
+                    <td>
+                        <form asp-action="DeleteWord" method="post" style="display:inline;">
+                            <input type="hidden" name="wordId" value="@word.WordID" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        <button class="btn btn-primary" onclick="openEditModal(@word.WordID, '@word.Text')">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form asp-action="AddWord" method="post">
+        <div class="form-group">
+            <label for="newWord">Add New Word</label>
+            <input type="text" name="newWord" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-success">Add Word</button>
+    </form>
+</div>
+
+<div id="editModal" style="display:none;">
+    <div class="admin-container">
+        <h2>Edit Word</h2>
+        <form asp-action="EditWord" method="post">
+            <input type="hidden" id="editWordId" name="wordId" />
+            <div class="form-group">
+                <label for="updatedWord">Updated Word</label>
+                <input type="text" id="updatedWord" name="updatedWord" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openEditModal(wordId, wordText) {
+        document.getElementById('editWordId').value = wordId;
+        document.getElementById('updatedWord').value = wordText;
+        document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').style.display = 'none';
+    }
+</script>

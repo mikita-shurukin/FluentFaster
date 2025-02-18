@@ -14,6 +14,7 @@ namespace FluentFaster.Data
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<AnswerOption> AnswerOptions { get; set; }
+        public DbSet<Word> Words { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,6 +49,12 @@ namespace FluentFaster.Data
                 .HasOne(a => a.Question)
                 .WithMany(q => q.AnswerOptions)
                 .HasForeignKey(a => a.QuestionID);
+
+            modelBuilder.Entity<Word>().HasKey(w => w.WordID);
+            modelBuilder.Entity<Word>()
+                .HasOne(w => w.Game)
+                .WithMany(g => g.Words)
+                .HasForeignKey(w => w.GameID);
         }
     }
 }

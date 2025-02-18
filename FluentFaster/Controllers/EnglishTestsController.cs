@@ -1,16 +1,15 @@
 ﻿using FluentFaster.Data;
-using FluentFaster.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FluentFaster.Controllers
 {
-    public class LearnGrammarController : Controller
+    public class EnglishTestsController : Controller
     {
         private readonly AppDbContext _context;
 
-        public LearnGrammarController(AppDbContext context)
+        public EnglishTestsController(AppDbContext context)
         {
             _context = context;
         }
@@ -19,7 +18,7 @@ namespace FluentFaster.Controllers
         public async Task<IActionResult> Index()
         {
             var topics = await _context.GrammarTopics
-                                       .Where(t => t.GameID == 1)
+                                       .Where(t => t.GameID == 2)
                                        .ToListAsync();
             return View(topics);
         }
@@ -50,8 +49,8 @@ namespace FluentFaster.Controllers
             return System.IO.File.Exists(viewPath);
         }
 
-        [Authorize]
-        public async Task<IActionResult> TestDetails(int id)
+
+        public async Task<IActionResult> Test(int id)
         {
             var test = await _context.Tests
                 .Include(t => t.Questions)
@@ -70,5 +69,6 @@ namespace FluentFaster.Controllers
 
             return View(test);
         }
+
     }
 }

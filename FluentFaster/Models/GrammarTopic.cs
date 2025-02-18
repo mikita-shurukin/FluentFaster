@@ -7,5 +7,6 @@
         public int GameID { get; set; }
         public Game Game { get; set; }
         public List<Test> Tests { get; set; }
+
     }
 }

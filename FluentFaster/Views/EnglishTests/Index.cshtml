@@ -1,17 +1,17 @@
-﻿@model FluentFaster.Models.Game
+﻿@model IEnumerable<FluentFaster.Models.GrammarTopic>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="~/css/main-page.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/main-page.css" asp-append-version="true" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Model.GameName</title>
+    <title>Learn Grammar - FluentLab</title>
 </head>
 <body>
     <div class="lessons">
         <div class="container">
-            @if (Model.GrammarTopics.Any())
+            @if (Model.Any())
             {
                 <table class="lessons-table">
                     <tbody>
@@ -19,14 +19,14 @@
                             int columns = 3;
                             int count = 0;
                         }
-                        @foreach (var topic in Model.GrammarTopics)
+                        @foreach (var topic in Model)
                         {
                             if (count % columns == 0)
                             {
                                 @:<tr>
                             }
                             <td>
-                                <a href="@Url.Action("TopicDetails", "LearnGrammar", new { id = topic.TopicID })" class="card-link">
+                                <a href="@Url.Action("Test", "EnglishTests", new { id = topic.TopicID })" class="card-link">
                                     <div class="card">
                                         <div class="lesson-title">
                                             @topic.TopicName
@@ -49,7 +49,7 @@
             }
             else
             {
-                <p>In development</p>
+                <p>No grammar topics available yet.</p>
             }
         </div>
     </div>

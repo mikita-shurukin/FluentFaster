@@ -1,60 +1,21 @@
-﻿@model IEnumerable<FluentFaster.Models.Game>
+﻿@{
+    ViewData["Title"] = "FluentFaster";
+}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="~/css/main-page.css" asp-append-version="true" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
-    <title>FluentLab</title>
-</head>
-<body>
-    <div class="lessons">
-        <div class="container">
-            @if (Model.Any())
-            {
-                <table class="lessons-table">
-                    <tbody>
-                        @{
-                            int columns = 3;
-                            int count = 0;
-                        }
-                        @foreach (var game in Model)
-                        {
-                            if (count % columns == 0)
-                            {
-                                @:<tr>
-                            }
-                            <td>
-                                <a href="@Url.Action("GameDetails", "Home", new { id = game.GameID })" class="card-link">
-                                    <div class="card">
-                                        <div class="lesson-title">
-                                            @game.GameName
-                                        </div>
-                                    </div>
-                                </a>
-                            </td>
-                            count++;
-                            if (count % columns == 0)
-                            {
-                                @:</tr>
-                            }
-                        }
-                        @if (count % columns != 0)
-                        {
-                            @:</tr>
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <p>In development</p>
-            }
-        </div>
+<link rel="stylesheet" href="~/css/welcome-page.css" asp-append-version="true" />
+
+<main>
+    <div class="description">
+        <h2>Welcome to FluentFaster</h2>
+        <p>
+            This is your ultimate space to learn and practice English in a fun and interactive way.
+            Explore grammar lessons, test your language skills, and challenge yourself with engaging word games.
+        </p>
     </div>
-</body>
-</html>
+
+    <div class="games-section">
+        <a href="@Url.Action("Index", "LearnGrammar")" class="game-card">Learn Grammar</a>
+        <a href="@Url.Action("Index", "EnglishTests")" class="game-card">Tests A1-B2</a>
+        <a href="@Url.Action("Index", "CreateWord")" class="game-card">Scrambled words</a>
+    </div>
+</main>

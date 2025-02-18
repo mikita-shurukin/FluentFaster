@@ -1,0 +1,141 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewBag.Title = "Scrambled Words Game";
+}
+
+<style>
+    .game-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #258cfb;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .scrambled-word {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: underline;
+        color: #258cfb;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        font-size: 1rem;
+        padding: 10px;
+        width: 100%;
+        max-width: 400px;
+        margin: 10px auto;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 6px;
+    }
+
+    .alert {
+        margin-bottom: 15px;
+        text-align: center;
+        color: #333;
+        background-color: #e7f3fe;
+        border-color: #b3d4fc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="game-container">
+    <h2>Scrambled Words Game</h2>
+
+    <div id="message" class="alert" style="display: none;"></div>
+
+    <p class="scrambled-word" id="scrambled-word">
+        Scrambled Word: <span>@ViewBag.ScrambledWord</span>
+    </p>
+
+    <form id="game-form">
+        <input type="hidden" id="gameId" name="gameId" value="@ViewBag.GameId" />
+        <input type="hidden" id="originalWord" name="originalWord" value="@ViewBag.OriginalWord" />
+
+        <div class="mb-3 text-center">
+            <label for="userAnswer" class="form-label">Your Answer:</label>
+            <input type="text" id="userAnswer" name="userAnswer" class="form-control" placeholder="Enter the word" required />
+        </div>
+
+        <div class="btn-group">
+            <button type="button" id="submit-btn" class="btn btn-success">Submit</button>
+            <button type="button" id="skip-btn" class="btn btn-warning">Skip</button>
+        </div>
+    </form>
+    <div class="text-center mt-3">
+        @if (HttpContextAccessor.HttpContext.User.IsInRole("Admin"))
+        {
+            <a href="@Url.Action("ManageWords", "CreateWord")" class="btn btn-primary">Manage Words</a>
+        }
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#submit-btn").click(function () {
+            sendAnswer("Submit");
+        });
+
+        $("#skip-btn").click(function () {
+            sendAnswer("Skip");
+        });
+
+        function sendAnswer(action) {
+            const data = {
+                gameId: $("#gameId").val(),
+                originalWord: $("#originalWord").val(),
+                userAnswer: $("#userAnswer").val(),
+                action: action,
+            };
+
+            $.ajax({
+                url: "/CreateWord/SubmitAnswer",
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    $("#scrambled-word span").text(response.scrambledWord);
+                    $("#originalWord").val(response.originalWord);
+                    $("#userAnswer").val("");
+                    $("#message").text(response.message).show();
+                },
+                error: function () {
+                    $("#message").text("An error occurred. Please try again.").show();
+                },
+            });
+        }
+    });
+</script>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FluentFaster.Models.GrammarTopic>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/main-page.css" asp-append-version="true" />
+    <title>Learn Grammar - FluentFaster</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="description">
+            <h2>Improve Your Grammar</h2>
+            <p>Choose a topic and start learning grammar in a fun and interactive way!</p>
+        </div>
+
+        <div class="lessons-section">
+            @if (Model.Any())
+            {
+                <div class="lessons-grid">
+                    @foreach (var topic in Model)
+                    {
+                        <a href="@Url.Action("TopicDetails", "LearnGrammar", new { id = topic.TopicID })" class="lesson-card">
+                            <div class="lesson-title">@topic.TopicName</div>
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="no-topics">No grammar topics available yet.</p>
+            }
+        </div>
+    </div>
+</body>
+
+</html>
